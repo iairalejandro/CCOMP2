@@ -3,6 +3,21 @@
 using namespace std;
 
 
+int sumMod(int res1, int res2) {
+
+}
+
+int restMod() {
+
+}
+
+int divMod() {
+
+}
+
+int invMultMod() {
+
+}
 
 
 
@@ -17,6 +32,7 @@ int main() {
 	cin >> n2;
 	result = n1 % n2;
 	cout << result;
+
 
 
 }
