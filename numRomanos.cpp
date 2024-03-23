@@ -8,12 +8,7 @@ int main()
     cout << "Ingrese un numero a convertir de 1 hasta 9999: ";
     cin >> num;
 
-    if (num < 1) {
-        cout << "Solo numeros entre los indicados" << endl;
-        return 0;
-    }
-
-    if (num > 9999) {
+    if ((num < 1) || (num > 9999)) {
         cout << "Solo numeros entre los indicados" << endl;
         return 0;
     }
