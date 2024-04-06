@@ -33,7 +33,7 @@ int diasEnMes(int month, int year) {
 
 // Función para obtener el día de la semana en que comienza un mes
 int obtenerDiaInicio(int year, int month) {
-    // Zeller's Congruence algorithm
+    // Congru de Zeller
     if (month < 3) {
         month += 12;
         year--;
