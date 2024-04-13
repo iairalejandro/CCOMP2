@@ -54,8 +54,8 @@ void encriptarArchivo(const string& archivoEntrada, const string& archivoSalida,
 
     char caracter;
     while (entrada.get(caracter)) {
-        int valorOriginal = static_cast<unsigned char>(caracter); // Obtener el valor ASCII del caracter
-        int valorEncriptado = (a * valorOriginal + b) % 256; // Módulo 256 para la tabla ASCII completa
+        int valorOriginal = static_cast<unsigned char>(caracter);
+        int valorEncriptado = (a * valorOriginal + b) % 256;
         salida << static_cast<char>(valorEncriptado);
     }
 
@@ -64,7 +64,7 @@ void encriptarArchivo(const string& archivoEntrada, const string& archivoSalida,
 }
 
 void desencriptarArchivo(const string& archivoEncriptado, const string& archivoDesencriptado, int a, int b) {
-    int inverso_a = inversoMultiplicativo(a, 256); // Usamos 256 para el módulo para la tabla ASCII completa
+    int inverso_a = inversoMultiplicativo(a, b);
 
     if (inverso_a == -1) {
         cout << "No se puede calcular el inverso multiplicativo de 'a'." << endl;
@@ -86,8 +86,8 @@ void desencriptarArchivo(const string& archivoEncriptado, const string& archivoD
 
     char caracter;
     while (entrada.get(caracter)) {
-        int valorEncriptado = static_cast<unsigned char>(caracter); // Obtener el valor ASCII del caracter encriptado
-        int valorOriginal = (inverso_a * (valorEncriptado - b + 256)) % 256; // Desencriptar usando el inverso de a
+        int valorEncriptado = static_cast<unsigned char>(caracter);
+        int valorOriginal = (inverso_a * (valorEncriptado)) % 256;
         salida << static_cast<char>(valorOriginal);
     }
 
@@ -102,8 +102,7 @@ int main() {
 
     cout << "Ingrese la clave a: ";
     cin >> a;
-
-    cout << "Ingrese la clave b (número entero): ";
+    cout << "Ingrese la clave b (mod): ";
     cin >> b;
 
     cout << "Ingrese el nombre del archivo de entrada: ";
