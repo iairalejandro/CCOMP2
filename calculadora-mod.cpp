@@ -2,6 +2,12 @@
 
 using namespace std;
 
+int mcd(int a, int b) {
+    if (b == 0)
+        return a;
+    return mcd(b, a % b);
+}
+
 int sumaModulo(int a, int b, int n) {
     return (a + b) % n;
 }
@@ -17,6 +23,11 @@ int multiModulo(int a, int b, int n) {
 int inversoMultiplicativo(int a, int n) {
     int m0 = n, tmp, q;
     int u0 = 0, u1 = 1;
+
+    if (mcd(a, n) != 1) {
+        cout << "No existe inverso multiplicativo para " << a << " mod " << n << endl;
+        return -1;
+    }
 
     if (n == 1)
         return 1;
@@ -80,11 +91,14 @@ int main() {
                 cout << "El resultado de la multiplicacion es: " << multiModulo(a, b, n) << " mod " << n << endl;
                 break;
             case 4:
-                cout << "Ingrese el numero: ";
+                cout << "Ingrese el primer numero: ";
                 cin >> a;
-                cout << "Ingrese el modulo: ";
+                cout << "Ingrese el segundo numero: ";
                 cin >> n;
-                cout << "El inverso multiplicativo de " << a << " mod " << n << " es: " << inversoMultiplicativo(a, n) << " mod " << n << endl;
+                if (mcd(a, n) == 1)
+                    cout << "El inverso multiplicativo de " << a << " mod " << n << " es: " << inversoMultiplicativo(a, n) << " mod " << n << endl;
+                else
+                    cout << "No existe inverso multiplicativo para " << a << " mod " << n << endl;
                 break;
             case 0:
                 cout << "Saliendo del programa." << endl;
