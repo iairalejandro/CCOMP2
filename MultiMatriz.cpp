@@ -4,24 +4,32 @@ using namespace std;
 const int SIZE = 3;
 const int NUM_MATRICES = 2;
 
-int getIndex(int row, int col, int matrix) {
-    return matrix * SIZE * SIZE + row * SIZE + col;
+int* getElement(int *matrices, int row, int col, int matrix) {
+    return matrices + matrix * SIZE * SIZE + row * SIZE + col;
 }
 
 void multiplyMatrices(int *matrices, int *result) {
+    int *m = matrices;
     for (int i = 0; i < SIZE; ++i) {
         for (int j = 0; j < SIZE; ++j) {
+            int sum = 0;
+            int *m1_temp = m;
+            int *m2_temp = matrices + SIZE * SIZE + j;
             for (int k = 0; k < SIZE; ++k) {
-                result[getIndex(i, j, 0)] += matrices[getIndex(i, k, 0)] * matrices[getIndex(k, j, 1)];
+                sum += (*m1_temp) * (*m2_temp);
+                m1_temp++;
+                m2_temp += SIZE;
             }
+            *(result + i * SIZE + j) = sum;
         }
+        m += SIZE;
     }
 }
 
 void printMatrix(int *mat) {
     for (int i = 0; i < SIZE; ++i) {
         for (int j = 0; j < SIZE; ++j) {
-            cout << mat[getIndex(i, j, 0)] << " ";
+            cout << *getElement(mat, i, j, 0) << " ";
         }
         cout << endl;
     }
