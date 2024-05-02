@@ -33,8 +33,8 @@ bool hacerJugada(vector<vector<char>>& tablero, int x, int y, char jugador, int*
             int dx[] = {-1, 0, 1, 0};
             int dy[] = {0, -1, 0, 1};
             for (int i = 0; i < 4; ++i) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
+                int nx = x + *(dx + i);
+                int ny = y + *(dy + i);
                 if (esPosicionValida(nx, ny, tablero.size()) && tablero[nx][ny] != '.') {
                     adyacente = true;
                     break;
@@ -63,17 +63,17 @@ void cambiarFichas(vector<vector<char>>& tablero, int x, int y, char jugador, in
     int dx[] = {-1, 0, 1, 0};
     int dy[] = {0, -1, 0, 1};
     for (int i = 0; i < 4; ++i) {
-        int nx = x + dx[i];
-        int ny = y + dy[i];
+        int nx = x + *(dx + i);
+        int ny = y + *(dy + i);
         bool cambiar = false;
         while (esPosicionValida(nx, ny, tablero.size()) && tablero[nx][ny] != '.' && tablero[nx][ny] != jugador) {
-            nx += dx[i];
-            ny += dy[i];
+            nx += *(dx + i);
+            ny += *(dy + i);
             cambiar = true;
         }
         if (esPosicionValida(nx, ny, tablero.size()) && tablero[nx][ny] == jugador && cambiar) {
-            nx = x + dx[i];
-            ny = y + dy[i];
+            nx = x + *(dx + i);
+            ny = y + *(dy + i);
             while (tablero[nx][ny] != jugador) {
                 tablero[nx][ny] = jugador;
                 if (jugador == 'X') {
@@ -83,8 +83,8 @@ void cambiarFichas(vector<vector<char>>& tablero, int x, int y, char jugador, in
                     (*puntajeO)++;
                     (*puntajeX)--;
                 }
-                nx += dx[i];
-                ny += dy[i];
+                nx += *(dx + i);
+                ny += *(dy + i);
             }
         }
     }
